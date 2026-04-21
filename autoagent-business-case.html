@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Case · AutoAgent FLEX · Layer7 México</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #050d1a;
+  --navy-2:     #0a1628;
+  --navy-3:     #0f1f35;
+  --navy-4:     #152842;
+  --teal:       #00d4b4;
+  --teal-dim:   #00a88e;
+  --teal-glow:  rgba(0,212,180,.18);
+  --gold:       #f5b325;
+  --gold-dim:   #c48f1a;
+  --red:        #ff4d6d;
+  --green:      #22c55e;
+  --text:       #d4e4f7;
+  --text-muted: #6b8aab;
+  --border:     rgba(0,212,180,.14);
+  --border-h:   rgba(0,212,180,.35);
+  --card:       rgba(10,22,40,.75);
+  --radius:     12px;
+  --font-head:  'Syne', sans-serif;
+  --font-mono:  'DM Mono', monospace;
+  --font-body:  'Inter', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── BACKGROUND ─────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 10%, rgba(0,212,180,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 85% 85%, rgba(0,212,180,.05) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(245,179,37,.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* grid overlay */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(0,212,180,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,180,.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.wrap { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+/* ─── FOUNDER BANNER ─────────────────────────────── */
+.founder-banner {
+  background: linear-gradient(135deg, #7c2d12 0%, #9a3412 40%, #7c2d12 100%);
+  border-bottom: 1px solid rgba(245,179,37,.4);
+  padding: 0;
+  position: sticky; top: 0; z-index: 100;
+}
+.founder-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 10px 20px; max-width: 980px; margin: 0 auto;
+  flex-wrap: wrap;
+}
+.founder-badge {
+  display: flex; align-items: center; gap: 8px;
+}
+.founder-badge .fire { font-size: 18px; animation: pulse-fire 1.5s ease-in-out infinite; }
+@keyframes pulse-fire { 0%,100%{transform:scale(1)} 50%{transform:scale(1.25)} }
+.founder-badge strong {
+  font-family: var(--font-head); font-size: 13px; font-weight: 700;
+  color: var(--gold); letter-spacing: .05em; text-transform: uppercase;
+}
+.founder-badge span { font-size: 13px; color: #fde68a; }
+.countdown-wrap { display: flex; align-items: center; gap: 8px; }
+.countdown-label { font-size: 12px; color: #fde68a; opacity: .8; }
+#countdown {
+  font-family: var(--font-mono); font-size: 15px; font-weight: 500;
+  color: var(--gold); background: rgba(0,0,0,.35);
+  padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(245,179,37,.3);
+  letter-spacing: .05em;
+}
+
+/* ─── HERO ───────────────────────────────────────── */
+.hero {
+  padding: 64px 20px 48px;
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--teal); border: 1px solid var(--border-h);
+  background: var(--teal-glow); padding: 5px 14px; border-radius: 20px;
+  margin-bottom: 24px;
+}
+.hero-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--teal); border-radius: 50%; animation: blink 1.8s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+.hero h1 {
+  font-family: var(--font-head); font-size: clamp(32px,6vw,58px);
+  font-weight: 800; line-height: 1.08; letter-spacing: -.02em;
+  margin-bottom: 16px;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--teal) 0%, #4aecd8 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+.hero-sub {
+  font-size: 17px; color: var(--text-muted); max-width: 600px; margin: 0 auto 36px;
+}
+
+.hero-stats {
+  display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+  margin-top: 32px;
+}
+.hero-stat { text-align: center; }
+.hero-stat .val {
+  font-family: var(--font-head); font-size: 28px; font-weight: 800;
+  background: linear-gradient(135deg,var(--teal),#4aecd8);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  display: block;
+}
+.hero-stat .lbl { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; }
+
+/* ─── SECTION LABEL ──────────────────────────────── */
+.section-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-label::after { content:''; flex: 1; height:1px; background: var(--border); }
+
+/* ─── CARDS ──────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 28px;
+  transition: border-color .25s, box-shadow .25s;
+}
+.card:hover { border-color: var(--border-h); box-shadow: 0 0 28px var(--teal-glow); }
+.card h3 {
+  font-family: var(--font-head); font-size: 16px; font-weight: 700;
+  color: #fff; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 8px;
+}
+.card h3 .ico { font-size: 18px; }
+
+/* ─── PRICING TABLE ──────────────────────────────── */
+.pricing-section { padding: 0 20px 48px; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 16px; margin-bottom: 24px; }
+
+.price-card {
+  background: var(--navy-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px;
+  transition: border-color .25s, transform .2s;
+}
+.price-card:hover { border-color: var(--border-h); transform: translateY(-2px); }
+.price-card .pc-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 8px;
+}
+.price-card .pc-value {
+  font-family: var(--font-head); font-size: 30px; font-weight: 800; color: #fff;
+  line-height: 1;
+}
+.price-card .pc-unit {
+  font-family: var(--font-mono); font-size: 13px; color: var(--text-muted);
+}
+.price-card .pc-desc { font-size: 13px; color: var(--text-muted); margin-top: 8px; }
+.price-card.highlight { border-color: var(--teal-dim); background: linear-gradient(135deg,rgba(0,212,180,.08),var(--navy-2)); }
+.price-card.highlight .pc-value { color: var(--teal); }
+
+.addon-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 16px; background: var(--navy-3); border-radius: 8px; margin-bottom: 8px;
+  border: 1px solid var(--border);
+}
+.addon-row .ar-name { font-size: 14px; color: var(--text); }
+.addon-row .ar-val {
+  font-family: var(--font-mono); font-size: 13px; color: var(--teal);
+  font-weight: 500;
+}
+
+.zero-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.zero-tag {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.25);
+  color: var(--green); font-size: 12px; font-weight: 500;
+  padding: 4px 12px; border-radius: 20px;
+}
+.zero-tag::before { content:'✓'; font-weight: 700; }
+
+/* ─── CALCULATOR ─────────────────────────────────── */
+.calc-section { padding: 0 20px 48px; }
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media(max-width:640px){ .calc-grid { grid-template-columns: 1fr; } }
+
+.input-group { margin-bottom: 16px; }
+.input-group label {
+  display: block; font-size: 12px; font-weight: 500;
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em;
+  margin-bottom: 6px;
+}
+.input-group input, .input-group select {
+  width: 100%; background: var(--navy-3); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--font-body); font-size: 15px;
+  padding: 10px 14px; border-radius: 8px;
+  outline: none; transition: border-color .2s, box-shadow .2s;
+  -webkit-appearance: none; appearance: none;
+}
+.input-group input:focus, .input-group select:focus {
+  border-color: var(--teal-dim); box-shadow: 0 0 0 3px var(--teal-glow);
+}
+.input-group select { cursor: pointer; }
+.input-hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+/* scenario tabs */
+.scenario-tabs { display: flex; gap: 8px; margin-bottom: 24px; }
+.stab {
+  flex: 1; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  font-family: var(--font-head); border: 1px solid var(--border);
+  background: var(--navy-3); color: var(--text-muted);
+  cursor: pointer; transition: all .2s; text-align: center;
+}
+.stab:hover { border-color: var(--border-h); color: var(--text); }
+.stab.active { border-color: var(--teal); background: var(--teal-glow); color: var(--teal); }
+
+/* results */
+.results-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 24px; }
+@media(max-width:580px){ .results-grid { grid-template-columns: 1fr 1fr; } }
+
+.metric-card {
+  background: var(--navy-3); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px; text-align: center;
+  transition: border-color .2s;
+}
+.metric-card.positive { border-color: rgba(34,197,94,.3); }
+.metric-card.negative { border-color: rgba(255,77,109,.3); }
+.metric-card.neutral  { border-color: var(--border); }
+.metric-card .mc-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.metric-card .mc-val {
+  font-family: var(--font-head); font-size: 22px; font-weight: 800; line-height: 1;
+}
+.metric-card.positive .mc-val { color: var(--green); }
+.metric-card.negative .mc-val { color: var(--red); }
+.metric-card.neutral  .mc-val { color: var(--teal); }
+.metric-card .mc-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+/* breakdown table */
+.breakdown { background: var(--navy-3); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.breakdown-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 18px; border-bottom: 1px solid var(--border);
+}
+.breakdown-row:last-child { border-bottom: none; }
+.breakdown-row.total {
+  background: linear-gradient(90deg,rgba(0,212,180,.08),transparent);
+  border-top: 1px solid var(--border-h);
+}
+.breakdown-row .br-label { font-size: 13px; color: var(--text-muted); }
+.breakdown-row .br-val { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--text); }
+.breakdown-row.total .br-label { font-weight: 600; color: var(--text); }
+.breakdown-row.total .br-val { color: var(--teal); font-size: 15px; }
+
+.min-warn {
+  display: none; background: rgba(245,179,37,.1); border: 1px solid rgba(245,179,37,.35);
+  border-radius: 8px; padding: 10px 16px; margin-top: 12px;
+  font-size: 13px; color: var(--gold);
+}
+.min-warn.show { display: flex; align-items: center; gap: 8px; }
+
+/* ─── ROI TABLE ──────────────────────────────────── */
+.roi-section { padding: 0 20px 48px; }
+.scenario-compare {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 24px;
+}
+@media(max-width:600px){ .scenario-compare { grid-template-columns: 1fr; } }
+
+.sc-card {
+  border-radius: var(--radius); padding: 22px; border: 1px solid var(--border);
+  background: var(--navy-2); position: relative; overflow: hidden;
+  transition: transform .2s, border-color .25s;
+}
+.sc-card:hover { transform: translateY(-3px); border-color: var(--border-h); }
+.sc-card.base-sc { border-color: var(--teal-dim); }
+.sc-card::before {
+  content: attr(data-label);
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--teal); opacity: .7;
+  display: block; margin-bottom: 6px;
+}
+.sc-card .sc-name {
+  font-family: var(--font-head); font-size: 15px; font-weight: 700;
+  color: #fff; margin-bottom: 14px;
+}
+.sc-card .sc-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.05); }
+.sc-card .sc-item:last-child { border-bottom: none; }
+.sc-card .si-k { font-size: 12px; color: var(--text-muted); }
+.sc-card .si-v { font-family: var(--font-mono); font-size: 13px; font-weight: 500; }
+.sc-card .si-v.g { color: var(--green); }
+.sc-card .si-v.t { color: var(--teal); }
+.sc-card .si-v.w { color: #fff; }
+
+/* ─── POC TABLE ──────────────────────────────────── */
+.poc-section { padding: 0 20px 48px; }
+.poc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+@media(max-width:600px){ .poc-grid { grid-template-columns: 1fr; } }
+
+.poc-card {
+  border-radius: var(--radius); padding: 22px; border: 1px solid var(--border);
+  background: var(--navy-2); transition: border-color .25s;
+}
+.poc-card:hover { border-color: var(--border-h); }
+.poc-card .poc-seg {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 6px;
+}
+.poc-card .poc-name {
+  font-family: var(--font-head); font-size: 17px; font-weight: 700; color: #fff;
+  margin-bottom: 14px;
+}
+.poc-stat { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.05); }
+.poc-stat:last-child { border-bottom: none; }
+.poc-stat .ps-k { font-size: 13px; color: var(--text-muted); }
+.poc-stat .ps-v { font-family: var(--font-mono); font-size: 13px; color: var(--teal); font-weight: 500; }
+
+/* ─── FOUNDER CTA ────────────────────────────────── */
+.founder-section { padding: 0 20px 64px; }
+.founder-card {
+  background: linear-gradient(135deg, rgba(124,45,18,.35) 0%, rgba(154,52,18,.25) 50%, rgba(124,45,18,.3) 100%);
+  border: 1px solid rgba(245,179,37,.4); border-radius: 16px; padding: 36px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.founder-card::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(245,179,37,.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.founder-card .fc-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--gold);
+  background: rgba(245,179,37,.12); border: 1px solid rgba(245,179,37,.3);
+  padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+}
+.founder-card h2 {
+  font-family: var(--font-head); font-size: clamp(22px,4vw,34px); font-weight: 800;
+  color: #fff; margin-bottom: 12px;
+}
+.founder-card h2 em { font-style: normal; color: var(--gold); }
+.founder-card p { font-size: 15px; color: #fde68a; max-width: 540px; margin: 0 auto 28px; }
+
+.benefits-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 28px; }
+.benefit-tag {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(245,179,37,.1); border: 1px solid rgba(245,179,37,.25);
+  color: #fde68a; font-size: 13px; padding: 5px 14px; border-radius: 20px;
+}
+.benefit-tag::before { content: '✓'; color: var(--gold); font-weight: 700; }
+
+.deadline-box {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: rgba(0,0,0,.4); border: 1px solid rgba(245,179,37,.3);
+  border-radius: 10px; padding: 14px 24px; margin-bottom: 28px;
+}
+.deadline-box .dl-label { font-size: 13px; color: #fde68a; }
+.deadline-box .dl-date {
+  font-family: var(--font-head); font-size: 18px; font-weight: 700; color: var(--gold);
+}
+#countdown2 {
+  font-family: var(--font-mono); font-size: 16px; color: var(--gold);
+  background: rgba(245,179,37,.1); padding: 4px 12px; border-radius: 6px;
+}
+
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold); color: #1a0800; font-family: var(--font-head);
+  font-size: 16px; font-weight: 700; padding: 14px 32px;
+  border-radius: 10px; text-decoration: none; border: none; cursor: pointer;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 4px 24px rgba(245,179,37,.35);
+}
+.cta-btn:hover { background: #ffc93d; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(245,179,37,.5); }
+
+/* ─── FOOTER ─────────────────────────────────────── */
+footer {
+  text-align: center; padding: 24px 20px;
+  font-family: var(--font-mono); font-size: 12px; color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+footer strong { color: var(--teal); }
+
+/* ─── ANIMATIONS ─────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate { animation: fadeUp .55s ease both; }
+.d1 { animation-delay: .05s; }
+.d2 { animation-delay: .12s; }
+.d3 { animation-delay: .2s; }
+.d4 { animation-delay: .28s; }
+</style>
+</head>
+<body>
+
+<!-- FOUNDER STICKY BANNER -->
+<div class="founder-banner">
+  <div class="founder-inner">
+    <div class="founder-badge">
+      <span class="fire">🔥</span>
+      <strong>Programa Cliente Fundador</strong>
+      <span>— Exención del mínimo mensual ($30,000 MXN) si firmas antes del 30 Abr 2026</span>
+    </div>
+    <div class="countdown-wrap">
+      <span class="countdown-label">Tiempo restante:</span>
+      <span id="countdown">—</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow animate d1">Layer7 México · Business Case</div>
+    <h1 class="animate d2">Transforma tu cobranza con<br><em>AutoAgent FLEX</em></h1>
+    <p class="hero-sub animate d3">Voicebot IA para cobranza y atención al cliente. Sin setup · Sin licencia · Sin plazo forzoso · Agentes ilimitados.</p>
+
+    <div class="hero-stats animate d4">
+      <div class="hero-stat"><span class="val">$2.90</span><span class="lbl">MXN/min IA</span></div>
+      <div class="hero-stat"><span class="val">85%+</span><span class="lbl">Margen bruto</span></div>
+      <div class="hero-stat"><span class="val">5 días</span><span class="lbl">POC listo</span></div>
+      <div class="hero-stat"><span class="val">∞</span><span class="lbl">Agentes simultáneos</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="wrap">
+    <p class="section-label">Estructura de precios</p>
+
+    <div class="pricing-grid">
+      <div class="price-card highlight">
+        <div class="pc-label">Tarifa IA (saliente e inbound)</div>
+        <div class="pc-value">$2.90 <span class="pc-unit">MXN/min</span></div>
+        <div class="pc-desc">Todo incluido · DSP voice isolation · Zero alucinaciones · CONDUSEF compliant</div>
+      </div>
+      <div class="price-card">
+        <div class="pc-label">Voz móvil</div>
+        <div class="pc-value">$0.11 <span class="pc-unit">MXN/min</span></div>
+        <div class="pc-desc">Terminación a números celulares</div>
+      </div>
+      <div class="price-card">
+        <div class="pc-label">Voz fijo</div>
+        <div class="pc-value">$0.05 <span class="pc-unit">MXN/min</span></div>
+        <div class="pc-desc">Terminación a números de red fija</div>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-top:8px">Add-ons opcionales</p>
+    <div class="addon-row">
+      <span class="ar-name">📡 Webhooks (integración en tiempo real)</span>
+      <span class="ar-val">$3.40 MXN/min</span>
+    </div>
+    <div class="addon-row">
+      <span class="ar-name">📊 Analíticos de voz avanzados</span>
+      <span class="ar-val">$0.95 MXN/min</span>
+    </div>
+
+    <div class="zero-row">
+      <span class="zero-tag">Sin setup</span>
+      <span class="zero-tag">Sin licencia</span>
+      <span class="zero-tag">Sin plazo forzoso</span>
+      <span class="zero-tag">Agentes ilimitados</span>
+      <span class="zero-tag">Sin costo por integración</span>
+      <span class="zero-tag">Soporte incluido</span>
+    </div>
+
+    <div class="min-warn show" style="margin-top:20px; display:flex!important">
+      ⚠️ <span>Mínimo mensual: <strong>$30,000 MXN/mes</strong> — <em>Exento para Clientes Fundadores que firmen antes del 30 Abr 2026.</em></span>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calc-section">
+  <div class="wrap">
+    <p class="section-label">Calculadora de ahorro</p>
+
+    <div class="calc-grid">
+      <!-- LEFT: Inputs -->
+      <div class="card">
+        <h3><span class="ico">⚙️</span> Parámetros de operación</h3>
+
+        <div class="input-group">
+          <label>Segmento de empresa</label>
+          <select id="segmento" onchange="calcular()">
+            <option value="pequena">Pequeña (10–20 estaciones)</option>
+            <option value="mediana" selected>Mediana (21–50 estaciones)</option>
+            <option value="grande">Grande (51–100 estaciones)</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>Agentes humanos actuales</label>
+          <input type="number" id="agentes" value="30" min="1" oninput="calcular()">
+        </div>
+
+        <div class="input-group">
+          <label>Costo mensual por agente (MXN)</label>
+          <input type="number" id="costoAgente" value="12000" min="1000" oninput="calcular()">
+          <div class="input-hint">Incluye salario + prestaciones + overhead</div>
+        </div>
+
+        <div class="input-group">
+          <label>Volumen de llamadas / mes</label>
+          <input type="number" id="llamadas" value="15000" min="100" oninput="calcular()">
+        </div>
+
+        <div class="input-group">
+          <label>Duración promedio por llamada (min)</label>
+          <input type="number" id="duracion" value="4" min="0.5" step="0.5" oninput="calcular()">
+        </div>
+
+        <div class="input-group">
+          <label>Tipo de número destino</label>
+          <select id="tipoNum" onchange="calcular()">
+            <option value="movil" selected>Móvil ($0.11/min)</option>
+            <option value="fijo">Fijo ($0.05/min)</option>
+            <option value="mixto">Mixto (70% móvil / 30% fijo)</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>¿Requieres webhooks?</label>
+          <select id="webhooks" onchange="calcular()">
+            <option value="no" selected>No</option>
+            <option value="si">Sí (+$3.40/min)</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>¿Analíticos de voz?</label>
+          <select id="analiticos" onchange="calcular()">
+            <option value="no" selected>No</option>
+            <option value="si">Sí (+$0.95/min)</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>¿Eres Cliente Fundador?</label>
+          <select id="fundador" onchange="calcular()">
+            <option value="si" selected>Sí — firmo antes del 30 Abr 2026</option>
+            <option value="no">No</option>
+          </select>
+          <div class="input-hint">Los Clientes Fundadores quedan exentos del mínimo mensual de $30,000 MXN.</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Results -->
+      <div>
+        <div style="margin-bottom:16px">
+          <p style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Escenario</p>
+          <div class="scenario-tabs">
+            <button class="stab" onclick="setScenario('conservador',this)">Conservador</button>
+            <button class="stab active" onclick="setScenario('base',this)">Base</button>
+            <button class="stab" onclick="setScenario('optimista',this)">Optimista</button>
+          </div>
+          <div id="scenario-note" style="font-size:12px;color:var(--text-muted);margin-bottom:16px"></div>
+        </div>
+
+        <div class="results-grid">
+          <div class="metric-card positive">
+            <div class="mc-label">Costo actual/mes</div>
+            <div class="mc-val" id="costoActual">—</div>
+            <div class="mc-sub">Nómina de agentes</div>
+          </div>
+          <div class="metric-card neutral">
+            <div class="mc-label">Costo AutoAgent/mes</div>
+            <div class="mc-val" id="costoAutoagent">—</div>
+            <div class="mc-sub">Todo incluido</div>
+          </div>
+          <div class="metric-card positive">
+            <div class="mc-label">Ahorro mensual</div>
+            <div class="mc-val" id="ahorro">—</div>
+            <div class="mc-sub" id="pct-ahorro">—</div>
+          </div>
+          <div class="metric-card positive">
+            <div class="mc-label">Ahorro anual</div>
+            <div class="mc-val" id="ahorroAnual">—</div>
+            <div class="mc-sub">12 meses</div>
+          </div>
+          <div class="metric-card neutral">
+            <div class="mc-label">Min IA / mes</div>
+            <div class="mc-val" id="minIA">—</div>
+            <div class="mc-sub">Minutos totales</div>
+          </div>
+          <div class="metric-card neutral">
+            <div class="mc-label">Payback</div>
+            <div class="mc-val" id="payback">Inmediato</div>
+            <div class="mc-sub">Sin inversión inicial</div>
+          </div>
+        </div>
+
+        <div id="min-warn" class="min-warn" style="margin-bottom:12px"></div>
+
+        <div class="card" style="padding:20px">
+          <h3 style="font-size:14px;margin-bottom:14px"><span class="ico">📋</span> Desglose de costos AutoAgent</h3>
+          <div class="breakdown" id="breakdown"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI SCENARIOS -->
+<section class="roi-section">
+  <div class="wrap">
+    <p class="section-label">Comparativa de escenarios</p>
+    <div class="scenario-compare" id="scenario-compare"></div>
+  </div>
+</section>
+
+<!-- POC -->
+<section class="poc-section">
+  <div class="wrap">
+    <p class="section-label">Prueba de concepto (POC) — 5 días hábiles</p>
+    <div class="poc-grid">
+      <div class="poc-card">
+        <div class="poc-seg">Pequeña empresa</div>
+        <div class="poc-name">10–20 Estaciones</div>
+        <div class="poc-stat"><span class="ps-k">Minutos máx.</span><span class="ps-v">2,000 min</span></div>
+        <div class="poc-stat"><span class="ps-k">Canales simultáneos</span><span class="ps-v">4 canales</span></div>
+        <div class="poc-stat"><span class="ps-k">Plazo de implementación</span><span class="ps-v">5 días hábiles</span></div>
+        <div class="poc-stat"><span class="ps-k">Costo del POC</span><span class="ps-v">$0 MXN</span></div>
+      </div>
+      <div class="poc-card" style="border-color:var(--teal-dim)">
+        <div class="poc-seg">Mediana empresa</div>
+        <div class="poc-name">21–50 Estaciones</div>
+        <div class="poc-stat"><span class="ps-k">Minutos máx.</span><span class="ps-v">3,000 min</span></div>
+        <div class="poc-stat"><span class="ps-k">Canales simultáneos</span><span class="ps-v">6 canales</span></div>
+        <div class="poc-stat"><span class="ps-k">Plazo de implementación</span><span class="ps-v">5 días hábiles</span></div>
+        <div class="poc-stat"><span class="ps-k">Costo del POC</span><span class="ps-v">$0 MXN</span></div>
+      </div>
+      <div class="poc-card">
+        <div class="poc-seg">Gran empresa</div>
+        <div class="poc-name">51–100 Estaciones</div>
+        <div class="poc-stat"><span class="ps-k">Minutos máx.</span><span class="ps-v">5,000 min</span></div>
+        <div class="poc-stat"><span class="ps-k">Canales simultáneos</span><span class="ps-v">8 canales</span></div>
+        <div class="poc-stat"><span class="ps-k">Plazo de implementación</span><span class="ps-v">5 días hábiles</span></div>
+        <div class="poc-stat"><span class="ps-k">Costo del POC</span><span class="ps-v">$0 MXN</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER CTA -->
+<section class="founder-section">
+  <div class="wrap">
+    <p class="section-label">Oferta exclusiva</p>
+    <div class="founder-card">
+      <div class="fc-badge">🏆 Programa Cliente Fundador · Plazas limitadas</div>
+      <h2>Firma antes del 30 de abril 2026<br>y <em>elimina el mínimo mensual</em></h2>
+      <p>Los primeros en adoptar AutoAgent FLEX quedan exentos permanentemente del mínimo mensual de $30,000 MXN — escala desde el primer minuto, sin restricciones.</p>
+
+      <div class="benefits-list">
+        <span class="benefit-tag">Exención del mínimo $30k MXN</span>
+        <span class="benefit-tag">Sin plazo forzoso</span>
+        <span class="benefit-tag">Onboarding prioritario (5 días)</span>
+        <span class="benefit-tag">Soporte dedicado</span>
+        <span class="benefit-tag">Primero en lista de nuevas features</span>
+      </div>
+
+      <div class="deadline-box">
+        <div>
+          <div class="dl-label">Fecha límite</div>
+          <div class="dl-date">30 de abril de 2026</div>
+        </div>
+        <div>
+          <div class="dl-label" style="font-size:12px;color:#fde68a;margin-bottom:4px">Tiempo restante</div>
+          <span id="countdown2">—</span>
+        </div>
+      </div>
+
+      <br>
+      <a href="mailto:ventas@layer7.mx?subject=Cliente%20Fundador%20AutoAgent%20FLEX&body=Hola%2C%20quiero%20agendar%20una%20demo%20y%20conocer%20los%20t%C3%A9rminos%20del%20Programa%20Cliente%20Fundador." class="cta-btn">
+        📩 Agendar demo ahora
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <strong>Layer7 México</strong> · AutoAgent FLEX · Business Case Interactivo ·
+    Precios en MXN · Sujetos a propuesta formal ·
+    Generado el <span id="fecha-gen"></span>
+  </div>
+</footer>
+
+<script>
+/* ─── COUNTDOWN ────────────────────────────────────── */
+function updateCountdown(){
+  const deadline = new Date('2026-04-30T23:59:59-06:00');
+  const now = new Date();
+  const diff = deadline - now;
+  let txt;
+  if(diff <= 0){ txt = '¡Oferta expirada!'; }
+  else {
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    txt = `${d}d ${h.toString().padStart(2,'0')}h ${m.toString().padStart(2,'0')}m ${s.toString().padStart(2,'0')}s`;
+  }
+  document.getElementById('countdown').textContent = txt;
+  document.getElementById('countdown2').textContent = txt;
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+document.getElementById('fecha-gen').textContent = new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'});
+
+/* ─── SCENARIO STATE ───────────────────────────────── */
+let scenarioActivo = 'base';
+const scenarioMult = { conservador: 0.6, base: 1.0, optimista: 1.35 };
+const scenarioDesc = {
+  conservador: '60% del volumen estimado — adopción gradual, menor recuperación de cartera.',
+  base: '100% del volumen estimado — operación estándar del sector.',
+  optimista: '135% del volumen estimado — campañas intensivas, mayor tasa de contacto.'
+};
+
+function setScenario(sc, el){
+  scenarioActivo = sc;
+  document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  calcular();
+}
+
+/* ─── HELPERS ──────────────────────────────────────── */
+const fmt = (n) => '$' + Math.round(n).toLocaleString('es-MX');
+const fmtMin = (n) => Math.round(n).toLocaleString('es-MX') + ' min';
+
+function tarifaVoz(tipo){
+  if(tipo==='movil') return 0.11;
+  if(tipo==='fijo')  return 0.05;
+  return 0.7*0.11 + 0.3*0.05; // mixto
+}
+
+/* ─── MAIN CALC ────────────────────────────────────── */
+function calcular(){
+  const agentes    = parseFloat(document.getElementById('agentes').value)||0;
+  const costoAg    = parseFloat(document.getElementById('costoAgente').value)||0;
+  const llamadas   = parseFloat(document.getElementById('llamadas').value)||0;
+  const duracion   = parseFloat(document.getElementById('duracion').value)||0;
+  const tipo       = document.getElementById('tipoNum').value;
+  const wh         = document.getElementById('webhooks').value === 'si';
+  const ana        = document.getElementById('analiticos').value === 'si';
+  const esFundador = document.getElementById('fundador').value === 'si';
+  const mult       = scenarioMult[scenarioActivo];
+
+  document.getElementById('scenario-note').textContent = scenarioDesc[scenarioActivo];
+
+  const minTotales    = llamadas * duracion * mult;
+  const costoIA       = minTotales * 2.90;
+  const costoVoz      = minTotales * tarifaVoz(tipo);
+  const costoWH       = wh  ? minTotales * 3.40 : 0;
+  const costoAna      = ana ? minTotales * 0.95  : 0;
+  const totalAutoagent= costoIA + costoVoz + costoWH + costoAna;
+  const minMensual    = 30000;
+  const aplica = !esFundador && totalAutoagent < minMensual;
+  const costoFinal    = aplica ? minMensual : totalAutoagent;
+
+  const costoActualH = agentes * costoAg;
+  const ahorroMes    = costoActualH - costoFinal;
+  const pctAhorro    = costoActualH > 0 ? (ahorroMes/costoActualH*100) : 0;
+
+  /* Update metrics */
+  document.getElementById('costoActual').textContent      = fmt(costoActualH);
+  document.getElementById('costoAutoagent').textContent   = fmt(costoFinal);
+  document.getElementById('minIA').textContent            = fmtMin(minTotales);
+  document.getElementById('ahorro').textContent           = fmt(Math.max(0,ahorroMes));
+  document.getElementById('pct-ahorro').textContent       = pctAhorro > 0 ? `${Math.round(pctAhorro)}% menos` : 'Ver breakdown';
+  document.getElementById('ahorroAnual').textContent      = fmt(Math.max(0,ahorroMes)*12);
+  document.getElementById('payback').textContent          = 'Inmediato';
+
+  const mc = document.querySelectorAll('.metric-card');
+  mc[2].className = 'metric-card ' + (ahorroMes>=0?'positive':'negative');
+  mc[3].className = 'metric-card ' + (ahorroMes>=0?'positive':'negative');
+
+  /* Min monthly warning */
+  const warn = document.getElementById('min-warn');
+  if(aplica){
+    warn.innerHTML = `⚠️ Tu volumen estimado genera <strong>${fmt(totalAutoagent)}/mes</strong>. Se aplicará el mínimo mensual de <strong>$30,000 MXN</strong>. Solicita el <strong>Programa Cliente Fundador</strong> para exención.`;
+    warn.classList.add('show');
+  } else if(!esFundador && totalAutoagent >= minMensual){
+    warn.classList.remove('show');
+  } else if(esFundador){
+    warn.innerHTML = `✅ Como <strong>Cliente Fundador</strong>, tu mínimo mensual es <strong>$0</strong> — pagas solo lo que consumes.`;
+    warn.classList.add('show');
+  } else {
+    warn.classList.remove('show');
+  }
+
+  /* Breakdown */
+  const rows = [
+    ['IA (voicebot)', `${fmtMin(minTotales)} × $2.90`, costoIA],
+    ['Voz ' + (tipo==='movil'?'móvil':tipo==='fijo'?'fija':'mixta'), `${fmtMin(minTotales)} × $${tarifaVoz(tipo).toFixed(2)}`, costoVoz],
+  ];
+  if(wh)  rows.push(['Webhooks', `${fmtMin(minTotales)} × $3.40`, costoWH]);
+  if(ana) rows.push(['Analíticos de voz', `${fmtMin(minTotales)} × $0.95`, costoAna]);
+  rows.push(['TOTAL (antes mín.)', '', totalAutoagent]);
+  if(aplica) rows.push(['Mínimo mensual aplicado', 'Aplica', minMensual]);
+  if(esFundador && totalAutoagent < minMensual) rows.push(['Mínimo mensual', 'Exento (Fundador)', 0]);
+
+  let html = '';
+  rows.forEach((r,i) => {
+    const isTotal = r[0].includes('TOTAL') || r[0].includes('Mínimo mensual aplicado');
+    html += `<div class="breakdown-row ${isTotal?'total':''}">
+      <span class="br-label">${r[0]}${r[1]?'<br><small style="font-size:10px;opacity:.6">'+r[1]+'</small>':''}</span>
+      <span class="br-val">${r[2]===0&&i===rows.length-1?'Exento':fmt(r[2])}</span>
+    </div>`;
+  });
+  document.getElementById('breakdown').innerHTML = html;
+
+  /* Scenario compare */
+  renderScenarios(agentes, costoAg, llamadas, duracion, tipo, wh, ana, esFundador);
+}
+
+function renderScenarios(agentes, costoAg, llamadas, duracion, tipo, wh, ana, esFundador){
+  const costoActualH = agentes * costoAg;
+  const minMensual = 30000;
+  let html = '';
+  ['conservador','base','optimista'].forEach(sc => {
+    const mult = scenarioMult[sc];
+    const min  = llamadas * duracion * mult;
+    const tot  = min*(2.90 + tarifaVoz(tipo) + (wh?3.40:0) + (ana?0.95:0));
+    const aplica = !esFundador && tot < minMensual;
+    const final  = aplica ? minMensual : tot;
+    const ahorro = costoActualH - final;
+    const pct    = costoActualH>0 ? Math.round(ahorro/costoActualH*100) : 0;
+    const isBase = sc === 'base';
+    html += `<div class="sc-card ${isBase?'base-sc':''}" data-label="${sc}">
+      <div class="sc-name">${sc.charAt(0).toUpperCase()+sc.slice(1)} (×${mult})</div>
+      <div class="sc-item"><span class="si-k">Min IA/mes</span><span class="si-v t">${fmtMin(min)}</span></div>
+      <div class="sc-item"><span class="si-k">Costo AutoAgent</span><span class="si-v w">${fmt(final)}</span></div>
+      <div class="sc-item"><span class="si-k">Costo actual</span><span class="si-v w">${fmt(costoActualH)}</span></div>
+      <div class="sc-item"><span class="si-k">Ahorro mes</span><span class="si-v ${ahorro>=0?'g':''}"> ${fmt(Math.max(0,ahorro))}</span></div>
+      <div class="sc-item"><span class="si-k">Ahorro anual</span><span class="si-v ${ahorro>=0?'g':''}">${fmt(Math.max(0,ahorro)*12)}</span></div>
+      <div class="sc-item"><span class="si-k">% ahorro</span><span class="si-v ${pct>=0?'g':''}">${pct>0?pct+'%':'—'}</span></div>
+    </div>`;
+  });
+  document.getElementById('scenario-compare').innerHTML = html;
+}
+
+/* init */
+calcular();
+</script>
+</body>
+</html>
